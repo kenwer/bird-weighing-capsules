@@ -45,7 +45,7 @@ module half(s=1000, clip=show_back_half) {
 // Base 1 stand
 module draw_base1(stand_x=100,
                  stand_y=100,
-                 stand_thickness=5
+                 stand_thickness=4
                 ) {
   // Initial cross
   linear_extrude(height=stand_thickness)
@@ -71,17 +71,18 @@ module draw_base1(stand_x=100,
 // Base 2, a different base stand (fits certain kind of pocket scales)
 module draw_base2(stand_x=80,
                   stand_y=60,
-                  stand_thickness=4
+                  stand_thickness=4,
+                  border_h=2
                  ) {
   _wall_width = 2;
-  _wall_rounding = 4;
+  _wall_rounding = 4.6;
   diff() {
     // base plate
     cuboid([stand_x+2*_wall_width, stand_y+2*_wall_width, stand_thickness], 
            rounding=_wall_rounding, edges="Z", anchor=BOT);
     // wall
     rect_tube(isize=[stand_x, stand_y], 
-              wall=_wall_width, rounding=_wall_rounding, h=3, anchor=TOP);
+              wall=_wall_width, rounding=_wall_rounding, h=border_h, anchor=TOP);
 
     // Connector
     down(nothing)
@@ -207,12 +208,13 @@ fwd(80)
 fwd(80) left(110)
   draw_base2(stand_x=76.2,
              stand_y=64.8,
-             stand_thickness=4
+             stand_thickness=4,
+             border_h=3
             );
 
 // Draw Connector for Base 2
 fwd(30) left(110)
-  draw_connector(connector_length=stand_thickness*2);
+  draw_connector(connector_length=stand_thickness*2-0.4);
 
 // Variant 1
 // For Lymnocryptes minimus (Jack snipe, Zwergschnepfe)
