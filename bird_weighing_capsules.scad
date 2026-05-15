@@ -18,7 +18,7 @@ slop = 0.15;
 
 
 // Toggles visibility of the back half for inspection
-show_back_half = true;
+show_back_half = false;
 
 // Default thickness of the base stands
 stand_thickness = 4;
@@ -204,18 +204,26 @@ fwd(80)
              stand_thickness=4
             );
 
-// Draw Base 2
+// Draw Base 2a
 fwd(80) left(110)
-  draw_base2(stand_x=76.2,
-             stand_y=64.8,
+  draw_base2(stand_x=76.4,
+             stand_y=65,
              stand_thickness=4,
-             border_h=3
+             border_h=2.6
             );
 
-// Draw Connector for Base 2
+// Draw Base 2b (with more headroom to adjust infill density to match weight of larger capsules)
+fwd(80) left(200)
+  draw_base2(stand_x=76.4,
+             stand_y=65,
+             stand_thickness=10,
+             border_h=2.6
+            );
+            
+// Draw Connector for Base 2a
 fwd(30) left(110)
   draw_connector(connector_length=stand_thickness*2-0.4);
-
+  
 // Variant 1
 // For Lymnocryptes minimus (Jack snipe, Zwergschnepfe)
 half()
@@ -232,9 +240,24 @@ half()
   );
 
 // Variant 2
+// For Paridae (Tit, Meise)
+left(50) half()
+  draw_capsule(
+    wall_thickness = wall_thickness,
+    id1 = 10, // inner diameter at lower section bottom (capsule base)
+    id2 = 14, // inner diameter at lower/mid section boundary
+    id3 = 25, // inner diameter at mid/upper section boundary
+    id4 = 27, // inner diameter at upper section top (capsule mouth)
+    od1 = 25+2*wall_thickness, // outer diameter of lower+mid sections (= id3 + 2*wall_thickness)
+    h1 = 23,  // height of lower section  (id1 -> id2)
+    h2 = 10,  // height of mid section    (id2 -> id3)
+    h3 = 25,  // height of upper section  (id3 -> id4)
+  );
+
+// Variant 3
 // From Regulus regulus (Goldcrest, Wintergoldhähnchen)
 //   to Sylvia borin (Garden warbler, Gartengrasmücke)
-left(80) half()
+left(100) half()
   draw_capsule(
     wall_thickness = wall_thickness,
     id1 = 10, // inner diameter at lower section bottom (capsule base)
@@ -244,13 +267,13 @@ left(80) half()
     od1 = 30+2*wall_thickness, // outer diameter of lower+mid sections (= id3 + 2*wall_thickness)
     h1 = 28,  // height of lower section  (id1 -> id2)
     h2 = 12,  // height of mid section    (id2 -> id3)
-    h3 = 35,  // height of upper section  (id3 -> id4)
+    h3 = 25,  // height of upper section  (id3 -> id4)
   );
 
-// Variant 3
+// Variant 4
 // From Sylvia borin (Garden warbler, Gartengrasmücke)
 //   to Coccothraustes coccothraustes (Hawfinch, Kernbeißer)
-left(140) half()
+left(150) half()
   draw_capsule(
     wall_thickness = wall_thickness,
     id1 = 16, // inner diameter at lower section bottom (capsule base)
@@ -263,7 +286,7 @@ left(140) half()
     h3 = 45,  // height of upper section  (id3 -> id4)
   );
 
-// Variant 4
+// Variant 5
 // From Coccothraustes coccothraustes (Hawfinch, Kernbeißer)
 //   to
 //      Dendrocopos major (Great spotted woodpecker, Buntspecht)
@@ -282,7 +305,7 @@ left(210) half()
     h3 = 53,  // height of upper section  (id3 -> id4)
   );
 
-// Variant 5
+// Variant 6
 // Picus viridis (European green woodpecker, Grünspecht)
 // Gallinula chloropus (Common moorhen, Teichralle)
 left(300) half()
@@ -298,7 +321,7 @@ left(300) half()
     h3 = 70,  // height of upper section  (id3 -> id4)
   );
 
-// Variant 6
+// Variant 7
 // Columba palumbus (Common wood pigeon, Ringeltaube)
 // Anas platyrhynchos (Mallard, Stockente)
 left(410) half()
