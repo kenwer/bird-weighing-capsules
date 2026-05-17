@@ -8,16 +8,16 @@ Parametric OpenSCAD models for capsules to weigh birds during ringing and bandin
 ---
 
 ## Overview
-The capsule is a tapered cone that narrows toward the bottom, keeping the bird calm and still in a natural head-down posture. It screws onto a threaded base stand that sits on a digital scale. Six size variants are provided, covering species from the Goldcrest (*Regulus regulus*, ~5 g) to the Mallard (*Anas platyrhynchos*, ~1000 g).
+The capsule is a tapered cone that narrows toward the bottom, keeping the bird calm and still in a natural head-down posture. It screws onto a threaded base stand that sits on a digital scale. Seven size variants are provided, covering species from the Goldcrest (*Regulus regulus*, ~5 g) to the Mallard (*Anas platyrhynchos*, ~1000 g).
 
 ![Image](https://github.com/user-attachments/assets/f6e2e6af-6815-49ac-a95d-b1830141d006)
 
 ## Models
 | Part | Description |
 |---|---|
-| Capsule | The main holding cone; six size variants (can be customized) |
+| Capsule | The main holding cone; seven size variants (can be customized) |
 | Base 1 | Cross-shaped stand with a threaded rod; general purpose |
-| Base 2 | Rectangular stand that fits a pocket scale tray (76 × 64.6 mm); threaded socket |
+| Base 2 | Rectangular stand that fits a pocket scale tray (76.4 × 65 mm); threaded socket (two variants: `stand_thickness=4` and `stand_thickness=10`) |
 | Connector | Double-ended threaded coupler for joining Base 2 to a capsule |
 
 Base 1 and the capsule use a male/female threaded connection (17 mm diameter, 1.5 mm pitch). Base 2 has an internal thread and requires the connector piece.
@@ -26,30 +26,32 @@ Base 1 and the capsule use a male/female threaded connection (17 mm diameter, 1.
 | Variant | Species | Common Name | German Name |
 |---|---|---|---|
 | 1 | *Lymnocryptes minimus* | Jack snipe | Zwergschnepfe |
-| 2 | *Regulus regulus* – *Sylvia borin* | Goldcrest – Garden warbler | Wintergoldhähnchen – Gartengrasmücke |
-| 3 | *Sylvia borin* – *Coccothraustes coccothraustes* | Garden warbler – Hawfinch | Gartengrasmücke – Kernbeißer |
-| 4 | *Coccothraustes coccothraustes* – *Turdus merula*, *Dendrocopos major*, *Turdus philomelos* | Hawfinch – Blackbird, Great spotted woodpecker, Song thrush | Kernbeißer – Amsel, Buntspecht, Singdrossel |
-| 5 | *Picus viridis*, *Gallinula chloropus* | European green woodpecker, Common moorhen | Grünspecht, Teichralle |
-| 6 | *Columba palumbus*, *Anas platyrhynchos* | Wood pigeon, Mallard | Ringeltaube, Stockente |
+| 2 | Paridae | Tit, Meise |
+| 3 | *Regulus regulus* - *Sylvia borin* | Goldcrest - Garden warbler | Wintergoldhähnchen - Gartengrasmücke |
+| 4 | *Sylvia borin* - *Coccothraustes coccothraustes* | Garden warbler - Hawfinch | Gartengrasmücke - Kernbeißer |
+| 5 | *Coccothraustes coccothraustes* - *Dendrocopos major* - *Turdus philomelos* - *Turdus merula* | Hawfinch - Great spotted woodpecker - Song thrush - Common blackbird | Kernbeißer - Buntspecht - Singdrossel - Amsel |
+| 6 | *Picus viridis* - *Gallinula chloropus* | European green woodpecker - Common moorhen | Grünspecht - Teichralle |
+| 7 | *Columba palumbus* - *Anas platyrhynchos* | Common wood pigeon - Mallard | Ringeltaube - Stockente |
 
 ## Requirements
 - [OpenSCAD](https://openscad.org/) (any recent version)
-- [BOSL2](https://github.com/BelfrySCAD/BOSL2) library — place it in your OpenSCAD library path
+- [BOSL2](https://github.com/BelfrySCAD/BOSL2) library - place it in your OpenSCAD library path
 
 ## Usage
-Open `BirdWeighingCapsule.scad` in OpenSCAD. The file renders all variants and base stands side by side in the preview. To export a single part for printing, comment out the parts you do not need and export as STL (F6 to render, then File -> Export -> STL or 3mf).
+Open `bird_weighing_capsules.scad` in OpenSCAD. The file renders all variants and base stands side by side in the preview. To export a single part for printing, comment out the parts you do not need and export as STL (F6 to render, then File -> Export -> STL or 3mf).
 
 ### Key parameters
 | Parameter | Default | Description |
 |---|---|---|
 | `wall_thickness` | 2 mm | Shell thickness throughout the capsule |
-| `show_back_half` | `true` | Cuts the model in half for inspection; set to `false` before exporting |
+| `show_back_half` | `false` | Cuts the model in half for inspection; set to `false` before exporting |
 | `threaded_rod_d` | 17 mm | Thread outer diameter (shared across all parts) |
-| `threaded_rod_h` | 5 mm | Thread engagement depth |
+| `threaded_rod_h` | `stand_thickness` | Thread engagement depth (defaults to `stand_thickness`) |
 | `slop` | 0.15 mm | Clearance added to mating threaded surfaces for print tolerance |
+| `border_h` | 2.6 mm | Wall height for Base 2 (not a global parameter, used in `draw_base2()`) |
 
 ### Customizing capsule dimensions
-`draw_capsule()` accepts explicit inner diameters (`id1`–`id4`) and section heights (`h1`–`h3`) for each of the three tapered sections. Adjust these values to fit additional species or scale platform sizes.
+`draw_capsule()` accepts explicit inner diameters (`id1`-`id4`) and section heights (`h1`-`h3`) for each of the three tapered sections. Adjust these values to fit additional species or scale platform sizes.
 
 ```
      |<---------- id4 ---------->|    ^
